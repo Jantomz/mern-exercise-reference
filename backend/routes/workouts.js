@@ -12,19 +12,19 @@ const {
 const router = express.Router();
 
 // GET all workouts
-router.get("https://mern-exercise-reference-api.onrender.com/api/workouts", getWorkouts);
+router.get("/", getWorkouts);
 
 // GET a single workout
-router.get("https://mern-exercise-reference-api.onrender.com/api/workouts/:id", getWorkout);
+router.get("/:id", getWorkout);
 
 // POST a new workout
 // calls the function to create a workout in the controller to keep the router file clean
-router.post("https://mern-exercise-reference-api.onrender.com/api/workouts/", createWorkout);
+router.post("/", createWorkout);
 
 // DELETE a workout
-router.delete("https://mern-exercise-reference-api.onrender.com/api/workouts/:id", deleteWorkout);
+router.delete("/:id", deleteWorkout);
 
 // UPDATE a workout
-router.patch("https://mern-exercise-reference-api.onrender.com/api/workouts/:id", updateWorkout);
+router.patch("/:id", updateWorkout);
 
 module.exports = router;
