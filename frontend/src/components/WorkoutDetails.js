@@ -8,7 +8,7 @@ export default function WorkoutDetails({ workout }) {
 
   const handleClick = async () => {
     const response = await fetch( // can change the localhost:4000 thing to the actual origin
-      `http://localhost:4000/api/workouts/${workout._id}`,
+      `https://mern-exercise-reference-api.onrender.com/api/workouts/${workout._id}`,
       {
         method: "DELETE",
       }

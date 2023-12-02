@@ -20,7 +20,7 @@ export default function WorkoutForm() {
       reps,
     };
 
-    const response = await fetch("http://localhost:4000/api/workouts", {
+    const response = await fetch("https://mern-exercise-reference-api.onrender.com/api/workouts", {
       // can change the localhost:4000 thing to the actual origin
       method: "POST", // make the fetch request a post
       body: JSON.stringify(workout), // make the body the object, but we need to send it as json, so we call JSON.stringify to make the object json
