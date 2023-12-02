@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     // async function to fetch workouts
     const fetchWorkouts = async () => {
-      const response = await fetch("http://localhost:4000/api/workouts"); // previously had http://localhost:4000 for the request, but now the package.json holds the automatic redirection to our backend server using proxy, removes cors error in development
+      const response = await fetch("https://mern-exercise-reference-api.onrender.com/api/workouts"); // previously had http://localhost:4000 for the request, but now the package.json holds the automatic redirection to our backend server using proxy, removes cors error in development
       const json = await response.json(); // parses the response json into objects
 
       if (response.ok) {

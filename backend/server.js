@@ -25,11 +25,11 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 
 app.use(cors(
-  {
-    origin: ["https://mern-exercise-reference.vercel.app/"],
-    methods: ["POST", "GET", "PATCH", "DELETE"],
-    credentials: true
-  }
+  // {
+  //   origin: ["mern-exercise-reference.vercel.app/"],
+  //   methods: ["POST", "GET", "PATCH", "DELETE"],
+  //   credentials: true
+  // }
 ));
 
 // old code section
