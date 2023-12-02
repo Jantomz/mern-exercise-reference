@@ -15,6 +15,8 @@ const app = express();
 
 const cors = require("cors");
 
+const PORT = process.env.PORT || 3001;
+
 // creating middleware, any code that runs between an HTTP request and our response
 // the 'next' parameter is a function that will allow the middleware to move on to the next piece of middleware
 // this middleware will always run first before the app.get request handler
@@ -22,12 +24,13 @@ const cors = require("cors");
 // this middleware uses a middleware built into express, checking if the request has a body, if so, it will parse and attach it to the request object
 app.use(express.json());
 
-app.use(cors());
-
-app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-});
+app.use(cors(
+  {
+    origin: ["https://mern-exercise-reference.vercel.app/"],
+    methods: ["POST", "GET", "PATCH", "DELETE"],
+    credentials: true
+  }
+));
 
 // old code section
 
@@ -48,7 +51,7 @@ mongoose
   .then(() => {
     // listen for requests only if connected to database
     // the function is called once the app is successfully listened on the port
-    app.listen(process.env.PORT, () => {
+    app.listen(PORT, () => {
       console.log(`Connected to DB and listening on port ${process.env.PORT}`);
     });
   })

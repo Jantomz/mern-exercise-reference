@@ -7,7 +7,7 @@ export default function WorkoutDetails({ workout }) {
   const { dispatch } = useWorkoutsContext();
 
   const handleClick = async () => {
-    const response = await fetch(
+    const response = await fetch( // can change the localhost:4000 thing to the actual origin
       `http://localhost:4000/api/workouts/${workout._id}`,
       {
         method: "DELETE",
