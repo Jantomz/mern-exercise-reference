@@ -15,6 +15,8 @@ const app = express();
 
 const cors = require("cors");
 
+app.send("HI");
+
 const PORT = process.env.PORT || 3001;
 
 // creating middleware, any code that runs between an HTTP request and our response
