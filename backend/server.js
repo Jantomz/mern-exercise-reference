@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 // importing the routes
 const workoutRoutes = require("./routes/workouts");
 
+const userRoutes = require("./routes/user");
+
 // importing express
 const express = require("express");
 
@@ -24,13 +26,19 @@ const PORT = process.env.PORT || 3001;
 // this middleware uses a middleware built into express, checking if the request has a body, if so, it will parse and attach it to the request object
 app.use(express.json());
 
-app.use(cors(
+app.use(
+  cors()
   // {
   //   origin: ["mern-exercise-reference.vercel.app/"],
   //   methods: ["POST", "GET", "PATCH", "DELETE"],
   //   credentials: true
   // }
-));
+);
+
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+});
 
 // old code section
 
@@ -44,6 +52,9 @@ app.use(cors(
 // routes, connects all the routes defined in the workouts file to the app
 // has a pre route that means the routes will only fire once the pre route is fired
 app.use("/api/workouts", workoutRoutes);
+
+// this time it will be /api/user/ either login or signup for the user routes
+app.use("/api/user", userRoutes);
 
 // connect to db, it is await async and returns a promise, so we tack on a .then to tell the program what to do after it has completed the connection, catches errors too
 mongoose
