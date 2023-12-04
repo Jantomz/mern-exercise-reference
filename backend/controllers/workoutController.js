@@ -7,7 +7,9 @@ const mongoose = require("mongoose");
 
 // get all workouts
 const getWorkouts = async (req, res) => {
-  const workouts = await Workout.find({}).sort({ createdAt: -1 }); // sorting in descending order
+  const user_id = req.user._id; // grabbing the id property that we sent earlier in the request header
+
+  const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 }); // sorting in descending order
   res.status(200).json(workouts);
 };
 
@@ -58,8 +60,10 @@ const createWorkout = async (req, res) => {
 
   // add document to db
   try {
+    const user_id = req.user._id;
+
     // workout.create() is asynchronous, it is calling the collection and using a method to create a document, the response we are promised is the new document that was created along with its ID
-    const workout = await Workout.create({ title, reps, load });
+    const workout = await Workout.create({ title, reps, load, user_id });
 
     // this returns the response that the workout was created
     // tacking on status 200 means the response was received and things were good, then the dot notation just sends the json format of the newly added document

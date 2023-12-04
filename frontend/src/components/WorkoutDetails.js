@@ -1,16 +1,27 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 export default function WorkoutDetails({ workout }) {
   const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   const handleClick = async () => {
-    const response = await fetch( // can change the localhost:4000 thing to the actual origin
-      `https://mern-exercise-reference-api.onrender.com/api/workouts/${workout._id}`,
+    if (!user) {
+      console.log("No user");
+      return;
+    }
+
+    const response = await fetch(
+      // can change the localhost:4000 thing to the actual origin
+      `http://localhost:4000/api/workouts/${workout._id}`,
       {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       }
     );
 

@@ -2,8 +2,12 @@ import { useState } from "react";
 
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
+import { useAuthContext } from "../hooks/useAuthContext";
+
 export default function WorkoutForm() {
   const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
+
   const [title, setTitle] = useState("");
   const [reps, setReps] = useState("");
   const [load, setLoad] = useState("");
@@ -20,12 +24,19 @@ export default function WorkoutForm() {
       reps,
     };
 
-    const response = await fetch("https://mern-exercise-reference-api.onrender.com/api/workouts", {
+    if (!user) {
+      // if we have a user, then we skip this error
+      setError("You must be logged in"); //
+      return;
+    }
+
+    const response = await fetch(`http://localhost:4000/api/workouts`, {
       // can change the localhost:4000 thing to the actual origin
       method: "POST", // make the fetch request a post
       body: JSON.stringify(workout), // make the body the object, but we need to send it as json, so we call JSON.stringify to make the object json
       headers: {
         "Content-Type": "application/json", // makes the content type specified as json
+        Authorization: `Bearer ${user.token}`, // sending the request with the user token
       },
     });
 

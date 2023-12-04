@@ -19,6 +19,10 @@ const workoutSchema = new Schema(
       type: Number,
       required: true,
     },
+    user_id: {
+      type: String,
+      required: true,
+    },
   },
   // this is a second property object, showing the timestamps of created and updated
   { timestamps: true }
